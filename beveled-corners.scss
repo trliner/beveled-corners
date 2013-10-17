@@ -1,0 +1,122 @@
+/**
+ * Beveled corner mixin
+ *
+ * Bevels corners of an element, in same fashion as border radius.
+ * Compatable down to IE 8
+ *
+ * If you have boxes with different bevel amounts, then the margins are
+ * a bit wacky, be ware.
+ *
+ * Usage:
+ * .module {
+ *     @include border-bevel($background-color, $bevel-radius, $corner-top-left-bevel (boolean), $corner-top-right-bevel (boolean), $corner-bottom-right-bevel (boolean), $corner-bottom-left-bevel (boolean);
+ * }
+ *
+ * The $corner-top-right-bevel etc. values are boolean values, true or false
+ *
+ * Limitations:
+ *   + Can't have border around the box
+ *   + All the corner bevel values must be same
+ *
+ * 
+ * @author  Antti Hiljá http://clubmate.fi @hiljaa
+ * @version 1.0
+ * @link    
+ * 
+ */
+
+// Top trapezoids
+@function corner-top-left-bevel($corner-bevel) {
+    $corner-top-left-bevel: 0 0 #{$corner-bevel}px #{$corner-bevel}px;
+    @return $corner-top-left-bevel;
+}
+@function corner-top-right-bevel($corner-bevel) { 
+    $corner-top-left-bevel: 0 #{$corner-bevel}px #{$corner-bevel}px 0;
+    @return $corner-top-left-bevel;
+}
+@function corner-top-both-bevel-none($corner-bevel) {
+    $corner-top-left-bevel: 0 0 #{$corner-bevel}px 0;
+    @return $corner-top-left-bevel;
+}
+@function corner-top-both-bevel($corner-bevel) {
+    $corner-top-left-bevel: 0 #{$corner-bevel}px #{$corner-bevel}px #{$corner-bevel}px;
+    @return $corner-top-left-bevel;
+}
+
+// Bottom trapezoids
+@function corner-bottom-right-bevel($corner-bevel) {
+    $corner-top-left-bevel: #{$corner-bevel}px #{$corner-bevel}px 0 0;
+    @return $corner-top-left-bevel;
+}
+@function corner-bottom-left-bevel($corner-bevel) {
+    $corner-top-left-bevel: #{$corner-bevel}px 0 0 #{$corner-bevel}px;
+    @return $corner-top-left-bevel;
+}
+@function corner-bottom-both-bevel-none($corner-bevel) {
+    $corner-top-left-bevel: #{$corner-bevel}px 0 0 0;
+    @return $corner-top-left-bevel;
+}
+@function corner-bottom-both-bevel($corner-bevel) {
+    $corner-top-left-bevel: #{$corner-bevel}px #{$corner-bevel}px 0 #{$corner-bevel}px;
+    @return $corner-top-left-bevel;
+}
+
+@mixin border-bevel(
+    $background-color: unquote("#aaa"),
+    $corner-bevel: unquote("20"),
+    
+    $corner-top-left-bevel: true,
+    $corner-top-right-bevel: true,
+    $corner-bottom-right-bevel: true,
+    $corner-bottom-left-bevel: true,
+    
+    $padding: $corner-bevel) {
+
+    background: #{$background-color};
+    position: relative;
+    margin: #{$corner-bevel * 2}px 0;
+    &:first-child {
+        margin-top: #{$corner-bevel}px;
+    }
+    padding: 0 #{$padding}px;
+    &:before,
+    &:after {
+        color: red;
+        box-sizing: border-box;
+        border-style: solid;
+        border-color: transparent;
+        content: "";
+        //content: "#{$corner-top-right-bevel}";
+        display: block;
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }
+    &:before {
+        @if $corner-top-left-bevel == false and $corner-top-right-bevel == false {
+            border-width: corner-top-both-bevel-none($corner-bevel);
+        } @else if $corner-top-left-bevel == true and $corner-top-right-bevel == true {
+            border-width: corner-top-both-bevel($corner-bevel);
+        } @else if $corner-top-left-bevel == false {
+            border-width: corner-top-right-bevel($corner-bevel);
+        } @else if $corner-top-left-bevel == true {
+            border-width: corner-top-left-bevel($corner-bevel);
+        }
+        border-color: transparent transparent #{$background-color} transparent;
+        top: -#{$corner-bevel}px;
+    }
+    &:after {
+        @if $corner-bottom-left-bevel == false and $corner-bottom-right-bevel == false {
+            border-width: corner-bottom-both-bevel-none($corner-bevel);
+        } @else if $corner-bottom-left-bevel == true and $corner-bottom-right-bevel == true {
+            border-width: corner-bottom-both-bevel($corner-bevel);
+        } @else if $corner-bottom-left-bevel == false {
+            border-width: corner-bottom-right-bevel($corner-bevel);
+        } @else if $corner-bottom-left-bevel == true {
+            border-width: corner-bottom-left-bevel($corner-bevel);
+        }
+        border-top-color: #{$background-color};
+        bottom: -#{$corner-bevel};
+    }
+    @content;
+}
