@@ -17,11 +17,13 @@
  * Limitations:
  *   + Can't have border around the box
  *   + All the corner bevel values must be same
+ *   + IE 8 can't have margin in the last child element, padding is fine tho
  *
  * 
  * @author  Antti Hiljá http://clubmate.fi @hiljaa
- * @version 1.0
- * @link    
+ * @version 0.1
+ * @link    http://clubmate.fi/css-beveled-corners-take-2-a-sass-mixin
+ * @link    http://codepen.io/hilja/pen/rhlwG
  * 
  */
 
@@ -75,6 +77,7 @@
     background: #{$background-color};
     position: relative;
     margin: #{$corner-bevel * 2}px 0;
+    height: 100%;
     &:first-child {
         margin-top: #{$corner-bevel}px;
     }

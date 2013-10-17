@@ -16,15 +16,23 @@ Creates beveled corners in same fashion as `border-radius`.
 
 ##Usage
 
-    @mixin border-bevel($background-color: unquote("#aaa"), $corner-bevel: unquote("20"), $corner-top-left-bevel: true, $corner-top-right-bevel: true, $corner-bottom-right-bevel: true, $corner-bottom-left-bevel: true, $padding: $corner-bevel)
+Configurable arguments:
 
-This will create a gray box with a corner bevel value of `20px`.
+- `$background-color` default `#aaa`, can be hex or RGBA
+- `$corner-bevel` bevel amount
+- `$corner-top-left-bevel` true or false, default true, false makes the corner non bevel
+- `$corner-top-right-bevel` boolean
+- `$corner-bottom-right-bevel` boolean
+- `$corner-bottom-left-bevel` boolean
+- `$padding` effects only to sides
+
+The following will create a gray box with a corner bevel value of `20px`:
 
     .module {
         @include corner-bevel();
     }
 
-This will create a yellow box.
+This will create a yellow box:
 
     .module {
         @include corner-bevel("Yellow");
@@ -36,7 +44,7 @@ We can isolate the corners with boolean values:
         @include corner-bevel("Yellow", 20, true, false, trua, false);
     }
 
-##Demo
+##Demo and more
 
-- Demo in CodePen
-- Article in my blog explaining things more detailed
+- Demo in [CodePen](http://codepen.io/hilja/pen/rhlwG)
+- [Article in my blog](http://clubmate.fi/css-beveled-co…2-a-sass-mixin/) explaining things in more detail
