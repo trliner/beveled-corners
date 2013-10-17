@@ -40,3 +40,6 @@ We can isolate the corners with boolean values:
 
 - Demo in CodePen
 - Article in my blog explaining things more detailed
+
+<p data-height="608" data-theme-id="0" data-slug-hash="rhlwG" data-user="hilja" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/hilja/pen/rhlwG'>rhlwG</a> by hilja (<a href='http://codepen.io/hilja'>@hilja</a>) on <a href='http://codepen.io'>CodePen</a></p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
