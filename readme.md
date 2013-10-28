@@ -1,6 +1,6 @@
-#CSS Beveled Corner Mixin for Sass
+#CSS Beveled Corner Mixins for Sass
 
-Creates beveled corners in same fashion as `border-radius`.
+These three mixins create beveled corners, difference between the mixins are their different browser support levels, that is to say, they use different methods. They all create beveled corners in same fashion as `border-radius`. It's explained [here](http://clubmate.fi/css-beveled-corners-take-2-a-sass-mixin).
 
 ##Wins
 
@@ -11,40 +11,26 @@ Creates beveled corners in same fashion as `border-radius`.
 
 ##Fails
 
-- Margins are a bit funny, see the demo
-- Can't have border around the box, but you can simulate border with `filter: drop-shadow();`. It only works in Chrome but it's something
+- Margins in  the `beveled-corner-veryold()` are a bit funny (check my [blogpost](http://clubmate.fi/css-beveled-corners-take-2-a-sass-mixin) w/ demos)
+- Can't have border around the box
 
 ##Usage
 
-Configurable arguments:
-
-- `$background-color` default `#aaa`, can be hex or RGBA
-- `$corner-bevel` bevel amount
-- `$corner-top-left-bevel` true or false, default true, false makes the corner non bevel
-- `$corner-top-right-bevel` boolean
-- `$corner-bottom-right-bevel` boolean
-- `$corner-bottom-left-bevel` boolean
-- `$padding` effects only to sides
-
-The following will create a gray box with a corner bevel value of `20px`:
+The following will create a gray box with a corner bevel value of `10px`:
 
     .module {
-        @include corner-bevel();
+        @include corner-bevel-new();
     }
-
-This will create a yellow box:
 
     .module {
-        @include corner-bevel("Yellow");
+        @include corner-bevel-old();
     }
-
-We can isolate the corners with boolean values:
 
     .module {
-        @include corner-bevel("Yellow", 20, true, false, trua, false);
+        @include corner-bevel-veryold();
     }
 
-##Demo and more
+See my [blogpost](http://clubmate.fi/css-beveled-corners-take-2-a-sass-mixin) for more examples.
 
-- Demo in [CodePen](http://codepen.io/hilja/pen/rhlwG)
-- [Article in my blog](http://clubmate.fi/css-beveled-co…2-a-sass-mixin/) explaining things in more detail
+##ToDo
+- Maybe make it a compass extension
